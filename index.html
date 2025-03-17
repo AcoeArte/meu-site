@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirecionando...</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html, body {
+            width: 100vw;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+            overflow: hidden;
+        }
+        img {
+            max-width: 150px;
+            margin-bottom: 15px;
+        }
+        #contador {
+            font-size: 24px;
+            font-weight: bold;
+            color: #ff4500;
+            margin: 10px 0;
+        }
+        .progress-container {
+            width: 90%;
+            max-width: 300px;
+            height: 10px;
+            background-color: #ddd;
+            border-radius: 5px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+        .progress-bar {
+            width: 100%;
+            height: 100%;
+            background-color: #ff4500;
+            transition: width 1s linear;
+        }
+        button {
+            background-color: #25D366;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 90%;
+            max-width: 300px;
+            margin-top: 15px;
+        }
+        button:hover {
+            background-color: #1ebe5d;
+        }
+        .motivational-text {
+            font-size: 18px;
+            color: #fff;
+            font-weight: bold;
+            margin-top: 20px;
+            font-style: italic;
+            padding: 15px;
+            background-color: #28a745;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 600px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .carousel {
+            width: 90%;
+            max-width: 300px;
+            height: 150px;
+            overflow: hidden;
+            position: relative;
+            margin-bottom: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .carousel img {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            transition: opacity 1s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+    <img src="https://i.ibb.co/ycLBKgZ1/Logo-A-o-Arte.png" alt="Logo">
+    
+    <div class="carousel">
+        <img src="https://via.placeholder.com/300x200/ff5733/ffffff?text=Foto+1" class="slide" style="opacity: 1;">
+        <img src="https://via.placeholder.com/300x200/33ff57/ffffff?text=Foto+2" class="slide">
+        <img src="https://via.placeholder.com/300x200/3357ff/ffffff?text=Foto+3" class="slide">
+    </div>
+    
+    <h1 style="font-size: 20px;">Você será redirecionado para o grupo do WhatsApp em:</h1>
+    <p id="contador">10</p>
+    
+    <!-- Barra de progresso -->
+    <div class="progress-container">
+        <div class="progress-bar" id="progress-bar"></div>
+    </div>
+
+    <div class="motivational-text">
+        "Afie seus objetivos com as melhores facas do mercado. Qualidade e precisão em cada lâmina."
+    </div>
+    
+    <a href="https://wa.me/message/XI6IZ27MI7FFB1" target="_blank">
+        <button>Falar com Atendente</button>
+    </a>
+    
+    <script>
+        let tempo = 10;
+        let linkWhatsApp = "https://chat.whatsapp.com/G3z12fym25G33YA32svNAC";
+        let progressBar = document.getElementById("progress-bar");
+
+        function atualizarContador() {
+            document.getElementById("contador").textContent = tempo;
+            progressBar.style.width = (tempo * 10) + "%"; // Atualiza a barra de progresso
+
+            if (tempo <= 0) {
+                window.location.href = linkWhatsApp;
+            } else {
+                tempo--;
+                setTimeout(atualizarContador, 1000);
+            }
+        }
+        atualizarContador();
+        
+        let slides = document.querySelectorAll(".slide");
+        let currentSlide = 0;
+        
+        function trocarSlide() {
+            slides[currentSlide].style.opacity = 0;
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].style.opacity = 1;
+            setTimeout(trocarSlide, 2000);
+        }
+        setTimeout(trocarSlide, 2000);
+    </script>
+</body>
+</html>
