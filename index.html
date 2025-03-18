@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
@@ -24,7 +24,7 @@
             overflow: hidden;
         }
         img {
-            max-width: 150px;
+            max-width: 120px;
             margin-bottom: 15px;
         }
         #contador {
@@ -63,49 +63,84 @@
         button:hover {
             background-color: #1ebe5d;
         }
-        .motivational-text {
-            font-size: 18px;
-            color: #fff;
+        
+        /* Destaque na frase "Carregando seu Acesso VIP" */
+        .vip-text {
+            font-size: 24px;
             font-weight: bold;
-            margin-top: 20px;
-            font-style: italic;
-            padding: 15px;
-            background-color: #28a745;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            width: 90%;
-            max-width: 600px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            color: gold;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+            margin-top: 15px;
         }
+        
+        /* Carrossel melhorado */
         .carousel {
             width: 90%;
-            max-width: 300px;
-            height: 150px;
+            max-width: 350px;
+            height: 350px;
             overflow: hidden;
             position: relative;
             margin-bottom: 15px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            border: 5px solid #ff4500;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         .carousel img {
             width: 100%;
             height: 100%;
+            object-fit: cover;
             position: absolute;
+            opacity: 0;
             transition: opacity 1s ease-in-out;
         }
+        .carousel img.active {
+            opacity: 1;
+        }
+
+        /* Indicadores do carrossel */
+        .carousel-indicators {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 5px;
+        }
+        .indicator {
+            width: 10px;
+            height: 10px;
+            background-color: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        .indicator.active {
+            background-color: white;
+        }
+
     </style>
 </head>
 <body>
     <img src="https://i.ibb.co/ycLBKgZ1/Logo-A-o-Arte.png" alt="Logo">
     
+    <!-- Carrossel melhorado -->
     <div class="carousel">
-        <img src="https://via.placeholder.com/300x200/ff5733/ffffff?text=Foto+1" class="slide" style="opacity: 1;">
-        <img src="https://via.placeholder.com/300x200/33ff57/ffffff?text=Foto+2" class="slide">
-        <img src="https://via.placeholder.com/300x200/3357ff/ffffff?text=Foto+3" class="slide">
+        <img src="https://i.imgur.com/I6Vu5oi.jpeg" class="slide active">
+        <img src="https://i.imgur.com/rlXkxwD.jpeg" class="slide">
+        <img src="https://i.imgur.com/lm0w2aA.jpeg" class="slide">
+        <img src="https://i.imgur.com/QEpZAly.jpeg" class="slide">
+        <img src="https://i.imgur.com/DMa3rTL.jpeg" class="slide">
+        <img src="https://i.imgur.com/GCFJB7w.jpeg" class="slide">
+        <img src="https://i.imgur.com/ratl0S6.jpeg" class="slide">
+        <img src="https://i.imgur.com/UZZFJYk.jpeg" class="slide">
+        
+        <!-- Indicadores -->
+        <div class="carousel-indicators"></div>
     </div>
     
-    <h1 style="font-size: 20px;">Você será redirecionado para o grupo do WhatsApp em:</h1>
+    <h1 class="vip-text">Carregando seu Acesso VIP em:</h1>
     <p id="contador">10</p>
     
     <!-- Barra de progresso -->
@@ -113,11 +148,7 @@
         <div class="progress-bar" id="progress-bar"></div>
     </div>
 
-    <div class="motivational-text">
-        "Afie seus objetivos com as melhores facas do mercado. Qualidade e precisão em cada lâmina."
-    </div>
-    
-    <a href="https://wa.me/message/XI6IZ27MI7FFB1" target="_blank">
+    <a href="https://wa.me/+555193769494" target="_blank">
         <button>Falar com Atendente</button>
     </a>
     
@@ -128,7 +159,7 @@
 
         function atualizarContador() {
             document.getElementById("contador").textContent = tempo;
-            progressBar.style.width = (tempo * 10) + "%"; // Atualiza a barra de progresso
+            progressBar.style.width = (tempo * 10) + "%";
 
             if (tempo <= 0) {
                 window.location.href = linkWhatsApp;
@@ -140,15 +171,36 @@
         atualizarContador();
         
         let slides = document.querySelectorAll(".slide");
+        let indicatorsContainer = document.querySelector(".carousel-indicators");
         let currentSlide = 0;
-        
-        function trocarSlide() {
-            slides[currentSlide].style.opacity = 0;
-            currentSlide = (currentSlide + 1) % slides.length;
-            slides[currentSlide].style.opacity = 1;
-            setTimeout(trocarSlide, 2000);
+
+        // Criando indicadores
+        slides.forEach((_, index) => {
+            let indicator = document.createElement("div");
+            indicator.classList.add("indicator");
+            if (index === 0) indicator.classList.add("active");
+            indicator.addEventListener("click", () => mudarSlide(index));
+            indicatorsContainer.appendChild(indicator);
+        });
+
+        let indicators = document.querySelectorAll(".indicator");
+
+        function mudarSlide(index) {
+            slides[currentSlide].classList.remove("active");
+            indicators[currentSlide].classList.remove("active");
+
+            currentSlide = index;
+            
+            slides[currentSlide].classList.add("active");
+            indicators[currentSlide].classList.add("active");
         }
-        setTimeout(trocarSlide, 2000);
+
+        function trocarSlide() {
+            let nextSlide = (currentSlide + 1) % slides.length;
+            mudarSlide(nextSlide);
+            setTimeout(trocarSlide, 3000);
+        }
+        setTimeout(trocarSlide, 3000);
     </script>
 </body>
 </html>
