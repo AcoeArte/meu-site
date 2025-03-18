@@ -19,28 +19,33 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
+            justify-content: space-evenly;
             padding: 10px;
             overflow: hidden;
         }
         img {
-            max-width: 120px;
-            margin-bottom: 15px;
+            max-width: 100px;
+            margin-top: 5px;
+        }
+        .vip-text {
+            font-size: 20px;
+            font-weight: bold;
+            color: gold;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
         }
         #contador {
-            font-size: 24px;
+            font-size: 22px;
             font-weight: bold;
             color: #ff4500;
-            margin: 10px 0;
         }
         .progress-container {
             width: 90%;
-            max-width: 300px;
-            height: 10px;
+            max-width: 280px;
+            height: 8px;
             background-color: #ddd;
             border-radius: 5px;
             overflow: hidden;
-            margin: 10px 0;
+            margin-top: 5px;
         }
         .progress-bar {
             width: 100%;
@@ -52,38 +57,28 @@
             background-color: #25D366;
             color: white;
             border: none;
-            padding: 12px 20px;
+            padding: 10px;
             font-size: 16px;
             border-radius: 5px;
             cursor: pointer;
             width: 90%;
-            max-width: 300px;
-            margin-top: 15px;
+            max-width: 250px;
+            margin-top: 10px;
         }
         button:hover {
             background-color: #1ebe5d;
         }
-        
-        /* Destaque na frase "Carregando seu Acesso VIP" */
-        .vip-text {
-            font-size: 24px;
-            font-weight: bold;
-            color: gold;
-            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
-            margin-top: 15px;
-        }
-        
-        /* Carrossel melhorado */
+
+        /* Ajuste do Carrossel */
         .carousel {
             width: 90%;
-            max-width: 350px;
-            height: 350px;
+            max-width: 300px;
+            height: 220px;
             overflow: hidden;
             position: relative;
-            margin-bottom: 15px;
-            border-radius: 15px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-            border: 5px solid #ff4500;
+            margin-top: 10px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -91,7 +86,7 @@
         .carousel img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: contain; /* Garante que a imagem fique centralizada */
             position: absolute;
             opacity: 0;
             transition: opacity 1s ease-in-out;
@@ -99,19 +94,19 @@
         .carousel img.active {
             opacity: 1;
         }
-
-        /* Indicadores do carrossel */
+        
+        /* Indicadores */
         .carousel-indicators {
             position: absolute;
-            bottom: 10px;
+            bottom: 5px;
             left: 50%;
             transform: translateX(-50%);
             display: flex;
-            gap: 5px;
+            gap: 4px;
         }
         .indicator {
-            width: 10px;
-            height: 10px;
+            width: 8px;
+            height: 8px;
             background-color: rgba(255, 255, 255, 0.5);
             border-radius: 50%;
             cursor: pointer;
@@ -125,7 +120,6 @@
 <body>
     <img src="https://i.ibb.co/ycLBKgZ1/Logo-A-o-Arte.png" alt="Logo">
     
-    <!-- Carrossel melhorado -->
     <div class="carousel">
         <img src="https://i.imgur.com/I6Vu5oi.jpeg" class="slide active">
         <img src="https://i.imgur.com/rlXkxwD.jpeg" class="slide">
@@ -136,14 +130,12 @@
         <img src="https://i.imgur.com/ratl0S6.jpeg" class="slide">
         <img src="https://i.imgur.com/UZZFJYk.jpeg" class="slide">
         
-        <!-- Indicadores -->
         <div class="carousel-indicators"></div>
     </div>
     
     <h1 class="vip-text">Carregando seu Acesso VIP em:</h1>
     <p id="contador">10</p>
     
-    <!-- Barra de progresso -->
     <div class="progress-container">
         <div class="progress-bar" id="progress-bar"></div>
     </div>
@@ -174,7 +166,6 @@
         let indicatorsContainer = document.querySelector(".carousel-indicators");
         let currentSlide = 0;
 
-        // Criando indicadores
         slides.forEach((_, index) => {
             let indicator = document.createElement("div");
             indicator.classList.add("indicator");
