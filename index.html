@@ -10,7 +10,10 @@
   !function (w, d, t) {
     w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(
     var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var r="https://analytics.tiktok.com/i18n/pixel/events.js",o=n&&n.partner;ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=r,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};n=document.createElement("script")
-    ;n.type="text/javascript",n.async=!0,n.src=r+"?sdkid="+e+"&lib="+t;e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(n,e)};ttq.load('CVQ28LJC77UEC208KBO0');ttq.page();
+    ;n.type="text/javascript",n.async=!0,n.src=r+"?sdkid="+e+"&lib="+t;e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(n,e)};
+
+    ttq.load('CVQ28LJC77UEC208KBO0');
+    ttq.page();
   }(window, document, 'ttq');
   </script>
   <!-- TikTok Pixel Code End -->
@@ -67,18 +70,60 @@
       position: relative;
     }
 
+    .atendente-btn {
+      background-color: #128C7E;
+      color: white;
+      border: none;
+      border-radius: 30px;
+      padding: 10px 20px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-bottom: 20px;
+      box-shadow: 0 0 10px #25D366;
+      transition: 0.3s ease;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .atendente-btn:hover {
+      background-color: #0d6e5d;
+      box-shadow: 0 0 15px #25D366;
+    }
+
     h2 {
       text-align: center;
       font-size: 22px;
       color: gold;
-      margin: 30px 0 10px;
+      margin-top: 20px;
+      margin-bottom: 10px;
     }
 
     #contador {
-      font-size: 36px;
+      font-size: 18px;
+      margin-bottom: 20px;
+      color: #ccc;
+    }
+
+    #confirmar {
+      background: linear-gradient(135deg, #25D366, #128C7E);
+      color: white;
+      font-size: 20px;
       font-weight: bold;
-      color: #25D366;
-      margin: 10px 0;
+      padding: 16px 24px;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      max-width: 280px;
+      box-shadow: 0 0 20px #25D366;
+      transition: all 0.3s ease;
+      text-decoration: none;
+    }
+
+    #confirmar:hover {
+      background: linear-gradient(135deg, #1ebe5d, #0d6e5d);
+      box-shadow: 0 0 25px #25D366;
+      transform: scale(1.05);
     }
 
     .instagram-preview {
@@ -125,7 +170,12 @@
     <div class="carousel-indicators"></div>
   </div>
 
-  <h2>🔒 Redirecionando para o Grupo VIP em <span id="contador">5</span> segundos...</h2>
+  <a href="https://wa.me/+555193769494" class="atendente-btn">👩‍💬 Atendente</a>
+
+  <h2>⏳ Redirecionando para o Grupo de Leilão...</h2>
+  <div id="contador">Você será redirecionado em <span id="tempo">10</span> segundos.</div>
+
+  <a id="confirmar" href="https://chat.whatsapp.com/KctHlzNxjCR4WTymiYOhES" onclick="ttq.track('ClickGrupoVIP')">✅ Entrar Agora</a>
 
   <iframe class="instagram-preview" src="https://www.instagram.com/acoeartebr/embed" allowtransparency="true"></iframe>
 
@@ -161,20 +211,20 @@
 
     setTimeout(trocarSlide, 4000);
 
-    // Redirecionamento com contagem regressiva
-    let tempo = 5;
-    const contadorEl = document.getElementById("contador");
-    const urlGrupo = "https://chat.whatsapp.com/KctHlzNxjCR4WTymiYOhES";
+    // Contador e Redirecionamento
+    let tempo = 10;
+    const tempoSpan = document.getElementById("tempo");
 
-    const contagem = setInterval(() => {
+    const interval = setInterval(() => {
       tempo--;
-      contadorEl.textContent = tempo;
-      if (tempo <= 0) {
-        clearInterval(contagem);
-        ttq.track('ClickGrupoVIP'); // Rastreamento TikTok
-        window.location.href = urlGrupo;
+      tempoSpan.textContent = tempo;
+      if (tempo === 0) {
+        clearInterval(interval);
+        ttq.track('ClickGrupoVIP');
+        window.location.href = "https://chat.whatsapp.com/KctHlzNxjCR4WTymiYOhES";
       }
     }, 1000);
   </script>
 </body>
 </html>
+
